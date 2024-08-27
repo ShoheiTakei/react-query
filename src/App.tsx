@@ -1,26 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import ReactDOM from 'react-dom/client'
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+import { DogImage } from './component/DogImage'
 
-function App() {
+const queryClient = new QueryClient()
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <QueryClientProvider client={queryClient}>
+      <DogImage />
+    </QueryClientProvider>
+  )
 }
 
-export default App;
+const rootElement = document.getElementById('root') as HTMLElement
+ReactDOM.createRoot(rootElement).render(<App />)
