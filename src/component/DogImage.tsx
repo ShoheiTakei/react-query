@@ -9,6 +9,14 @@ export const DogImage = () => {
   // NOTE: https://tanstack.com/query/latest/docs/framework/react/guides/queries
   const { isPending, error, data, isFetching } = useQuery<Dog>({
     queryKey: ['dogImage'],
+    // refetchOnWindowFocus: ウィンドウがフォーカスされたときにクエリを再フェッチするかどうかを制御する。
+    // デフォルトではtrueで、ウィンドウがフォーカスされたときにクエリが再フェッチされる
+    // refetchOnWindowFocus: false,
+    // staleTime: キャッシュが古くなるまでの時間をミリ秒単位で指定可能。
+    // デフォルトだと0で、キャッシュが常に新しいデータを返す。
+    staleTime: 1000 * 10,
+    // gcTime: ガベージコレクションが実行されるまでの時間。
+    gcTime: 1000 * 1,
     queryFn: async () => {
       const response = await fetch(
         'https://dog.ceo/api/breeds/image/random',
